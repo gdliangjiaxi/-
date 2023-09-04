@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.javaafter.mapper.RegisterMapper">
+
+    <select id="getSickInfomation"  resultType="com.example.javaafter.dto.SickDto">
+     select * from  hospital.sick a,hospital.register  b where    a.sick_name=b.sick_name and b.doctor_name=#{doctorName}  ;
+    </select>
+
+    <select id="getDoctorInfomation" resultType="java.lang.String">
+     SELECT doctor_name FROM hospital.register where sick_name =#{sickName} and end_time is null;
+
+    </select>
+
+    <select id="getDoctorRecordInfomation"  resultType="com.example.javaafter.dto.DoctorDto">
+     select * from  hospital.doctor a,hospital.register  b where    a.doctor_name=b.doctor_name and b.sick_name=#{sickName}  ;
+    </select>
+
+    <update id="updateAppointment" >
+    update hospital.register set end_time=#{endTime}  where sick_name =#{sickName} and doctor_name =#{doctorName} and end_time is null;
+</update>
+
+
+
+
+</mapper>
